@@ -1,0 +1,49 @@
+{
+  "name": "vue-ts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "jest"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "element-ui": "^2.12.0",
+    "lodash": "^4.17.15",
+    "simple-virtual-dom": "^0.1.10",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.1.0",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-typescript": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "babel-preset-env": "^1.7.0",
+    "commitizen": "^4.0.3",
+    "css-loader": "^3.2.0",
+    "cz-customizable": "^6.2.0",
+    "jest": "^24.9.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "node-sass": "^4.13.0",
+    "postcss-loader": "^3.0.0",
+    "regenerator-runtime": "^0.13.3",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "stylus-loader": "^3.0.2",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  }
+}

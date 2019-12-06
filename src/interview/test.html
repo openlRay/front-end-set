@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // const curry = fn =>
+  //   judge = (...args) =>
+  //   args.length === fn.length ?
+  //   fn(...args) :
+  //   (...arg) => judge(...args, ...arg)
+  function curry(fn, hole) {
+    const __len = fn.length
+    let args = [];
+    return function h() {
+      // 先把参数放入args数组
+      args = [...args, ...Array.from(arguments)]
+      // 如果长度超过原有函数参数列表长度，表示有占位
+      let holeNum = args.length - __len
+      // 第一个占位符对应的肯定是__len位置的变量，循环将所有占位符替换
+      for (let i = 0; i < holeNum; i++) {
+        args[args.indexOf(hole)] = args[__len]
+        args.splice(__len, 1)
+      }
+      // 如果没有占位符且参数数目已经够了
+      if (args.length < __len || args.indexOf(hole) > -1) {
+        return h
+      } else {
+        fn.apply(null, args)
+        return args = []
+      }
+    }
+  }
+  var fn = curry(function (a, b, c) {
+    console.log([a, b, c]);
+  });
+
+  fn("a", "b", 'c', 'd') // ["a", "b", "c"]
+  // fn("a", "b")("c") // ["a", "b", "c"]
+  // fn("a")("b")("c") // ["a", "b", "c"]
+  // fn("a")("b", "c") // ["a", "b", "c"]
+</script>
+
+</html>

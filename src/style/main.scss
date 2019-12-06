@@ -1,0 +1,41 @@
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.box {
+  padding: 10px 50px;
+
+  &>h2 {
+    font-size: 28px;
+    font-weight: 400;
+    color: #1f2f3d;
+  }
+}
+
+.panel {
+  .hd {
+    position: relative;
+
+    &>h3 {
+      margin: 55px 0 20px;
+      font-weight: 400;
+      color: #1f2f3d;
+      font-size: 22px;
+      line-height: 50px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .edit {
+      position: absolute;
+      right: 0;
+      top: 14px;
+    }
+  }
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-bottom: 1px dashed #ddd;
+}

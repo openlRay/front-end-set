@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1 id="name"></h1>
+  <input id="input" type="text">
+  <input type="button" value="改变data内容" onclick="changeInput()">
+
+  <script>
+    class Dep {
+      static target = null
+      constructor() {
+        this.deps = []
+      }
+      add(dep) {
+        this.deps.push(dep)
+      }
+      notify() {
+        this.deps.forEach(i => i.update())
+      }
+    }
+    class MyVue {
+      constructor(data) {
+        this.data = data
+        this.observe(data)
+      }
+      observe(obj) {
+        let keys = Object.keys(obj)
+        keys.forEach(i => {
+          defineObject(obj, i, obj[i])
+        })
+      }
+    }
+
+    function defineObject(obj, key, value) {
+      let dep = new Dep()
+      Object.defineProperty(obj, key, {
+        get() {
+          if (Dep.target) {
+            dep.add(Dep.target)
+          }
+          return value
+        },
+        set(newData) {
+          value = newData
+          dep.notify()
+        }
+      })
+    }
+
+    class Watch {
+      constructor(vm, cb, props) {
+        this.vm = vm
+        this.cb = cb
+        this.props = props
+        this.data = this.get()
+      }
+      get() {
+        Dep.target = this
+        let data = this.vm.data[this.props]
+        Dep.target = null
+        return data
+      }
+      update() {
+        let newData = this.vm.data[this.props]
+        if (this.data !== newData) {
+          this.cb(newData)
+          this.data = newData
+        }
+      }
+
+    }
+
+    let myVue = new MyVue({
+      name: '吴安斐'
+    })
+
+    function update(value) {
+      document.getElementById('name').innerHTML = value
+    }
+    document.getElementById('input').addEventListener('input', function (e) {
+      myVue.data.name = e.target.value
+    })
+    let watch = new Watch(myVue, update, 'name')
+  </script>
+</body>
+
+</html>

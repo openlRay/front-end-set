@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1 id="name"></h1>
+  <input id="input" type="text">
+  <input type="button" value="改变data内容" onclick="changeInput()">
+
+  <script>
+    class MyVue {
+      constructor(data) {
+        this._data = data
+        this._observe()
+      }
+    }
+    MyVue.prototype._observe = function () {
+      ''
+      let keys = Object.keys(this._data)
+      keys.forEach(key => {
+        defineObserve(this._data, key, this._data[key])
+      })
+    }
+
+    function defineObserve(obj, key, value) {
+      let dep = new Dep()
+      Object.defineProperty(obj, key, {
+        get: function () {
+          if (Dep.target) {
+            dep.addSub(Dep.target)
+          }
+          return value
+        },
+        set: function (newValue) {
+          value = newValue
+          dep.notify()
+        }
+      })
+    }
+
+    class Dep {
+      constructor() {
+        this.subs = []
+      }
+      static target = null
+      addSub(sub) {
+        this.subs.push(sub)
+      }
+      notify() {
+        this.subs.forEach(sub => {
+          sub.update()
+        })
+      }
+    }
+
+    class Watch {
+      constructor(vm, callback, props) {
+        this._vm = vm
+        this._callback = callback
+        this._props = props
+        this.value = this.get()
+      }
+      get() {
+        Dep.target = this
+        let value = this._vm._data[this._props]
+        Dep.target = null
+        return value
+      }
+      update() {
+        let value = this._vm._data[this._props]
+        let oldValue = this.value
+        if (oldValue !== value) {
+          this._callback.call(this._vm, value)
+          this.value = value
+        }
+      }
+    }
+
+    let myVue = new MyVue({
+      name: '吴安斐'
+    })
+
+    function update(value) {
+      document.getElementById('name').innerHTML = value
+    }
+    document.getElementById('input').addEventListener('input', function (e) {
+      myVue._data.name = e.target.value
+    })
+    let watch = new Watch(myVue, update, 'name')
+  </script>
+</body>
+
+</html>
