@@ -6,10 +6,14 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "jest"
+    "test": "jest",
+    "compiler": "babel src/babel-test --out-dir babel-lib --watch"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/runtime": "^7.7.7",
+    "@babel/runtime-corejs3": "^7.7.7",
+    "core-js": "^3.6.1",
     "element-ui": "^2.12.0",
     "lodash": "^4.17.15",
     "simple-virtual-dom": "^0.1.10",
@@ -20,11 +24,15 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-typescript": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "commitizen": "^4.0.3",
     "css-loader": "^3.2.0",
