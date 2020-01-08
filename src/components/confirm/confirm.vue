@@ -30,7 +30,6 @@
 
 <script>
 export default {
-  name: "MyConfirm",
   data () {
     return {
       visible: false,

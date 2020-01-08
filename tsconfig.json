@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false, // 隐式 any 类型
+
     "target": "esnext",
     "module": "esnext",
     "strict": true,
