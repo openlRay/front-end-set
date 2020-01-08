@@ -5,3 +5,7 @@ function square(n) {
 var x = 3
 var y = 17
 var c = x + y
+
+function getData() {
+  console.log('data')
+}
