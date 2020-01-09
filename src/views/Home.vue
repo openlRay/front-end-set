@@ -1,4 +1,9 @@
 <template>
+  <div>
+    <a href="/about">about</a>
+    <div></div>
+    <a href="/template">template</a>
+  </div>
 </template>
 
 <script lang="ts">
