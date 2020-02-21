@@ -17,7 +17,8 @@
     "strings": true
   },
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
   },
   // 添加 vue 支持
   "eslint.validate": [

@@ -5,11 +5,94 @@
   <meta charset="UTF-8">
   <title>Document</title>
 </head>
+<style>
+  .wrapper {
+    width: 90vw;
+    height: 40vh;
+    border: 2px dashed #ddd;
+    display: flex;
+  }
+
+  .left {
+    float: left;
+    width: 25%;
+    height: 100%;
+    background-color: lightgreen;
+  }
+
+  .center {
+    flex: 1;
+    background-color: red;
+    height: 100%;
+  }
+
+  .right {
+    width: 25%;
+    height: 100%;
+    float: right;
+    background-color: lightblue;
+  }
+
+  .tri {
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-bottom-color: red;
+  }
+
+  .ang {
+    width: 20%;
+    padding-top: 20%;
+    background-color: red;
+  }
+
+  .dia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .shade {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 540px;
+    height: 320px;
+    z-index: 2;
+    background-color: #ffffff;
+  }
+
+</style>
+
 
 <body>
-  <h1 id="name"></h1>
-  <input id="input" type="text">
-  <input type="button" value="改变data内容" onclick="changeInput()">
+  <div class="wrapper">
+    <div class="left">侧边栏</div>
+    <div class="center"></div>
+    <div class="right">主区域</div>
+  </div>
+
+  <div class="tri"></div>
+
+  <div class="ang"></div>
+
+  <div class="dia">
+    <div class="shade"></div>
+    <div class="dialog">
+
+    </div>
+  </div>
 
   <script>
 

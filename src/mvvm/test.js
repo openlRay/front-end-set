@@ -1,12 +1,8 @@
-function fn(nums) {
-  let dp = [1]
-  for (let i = 1; i < nums.length; i++) {
-    let max = []
-    for (let j = 0; j < i; j++) {
-      max.push(nums[i] > nums[j] ? dp[j] + 1 : 1)
-    }
-    dp[i] = Math.max.apply(null, max)
+function bind(context, args) {
+  let self = this
+  let fn = function(params) {
+    return self.apply(this instanceof fn ? this : context, [...args, ...params])
   }
-  return Math.max.apply(null, dp)
+  fn.prototype = Object.create(self)
+  return fn
 }
-console.log(fn([10, 9, 2, 5, 3, 7, 101, 18]))

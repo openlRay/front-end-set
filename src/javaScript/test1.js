@@ -1,48 +1,98 @@
-// 定义Promise的三种状态常量
-function isFunction(fn) {
-  return typeof fn === 'function'
-}
+let isFunction = fn => typeof fn === 'function'
 class MyPromise {
   constructor(handle) {
-    if (!isFunction(handle)) {
-      throw new Error('MyPromise must accept a function as a parameter')
-    }
+    if (isFunction(handle)) return false
     this.status = 'pending'
     this.value = undefined
-    this.failCb = []
     this.successCb = []
-    this.handle(this.resolve.bind(this), this.reject.bind(this))
+    this.failCb = []
+    handle(this.resolve.bind(this), this.reject.bind(this))
   }
-  resolve() {
-    const run = (data) => {
-      if (this.status !== 'pending') {
-        return
-      }
+  resolve(val) {
+    let runSuccess = v => {
       this.status = 'success'
-      this.value = data
-      let temp = undefined
-      while (temp = this.successCb.shift()) {
-        temp(this.value)
+      this.value = v
+      this.successCb.forEach(i => i(v))
+    }
+    let runFail = e => {
+      this.status = 'fail'
+      this.value = e
+      this.failCb.forEach(i => i(e))
+    }
+    let run = () => {
+      if (this.status !== 'pending') return
+      if (val instanceof MyPromise) {
+        val.then(
+          v => {
+            runSuccess(v)
+          },
+          e => {
+            runFail(e)
+          }
+        )
+      } else {
+        runSuccess(val)
       }
     }
     setTimeout(run, 0)
   }
-  reject() {
-    const run = (data) => {
-      if (this.status !== 'pending') {
-        return
-      }
+  reject(err) {
+    let run = () => {
+      if (this.status !== 'pending') return
       this.status = 'fail'
-      this.value = data
-      let temp = undefined
-      while (temp = this.failCb.shift()) {
-        temp(this.value)
-      }
+      this.value = err
+      this.failCb.forEach(i => i(err))
     }
     setTimeout(run, 0)
   }
 }
 
-MyPromise.prototype.then = function (_resolve, _reject) {
-  return new MyPromise(_resolveNext, _rejectNext)
+MyPromise.prototype.then = function(_resolve, _reject) {
+  let { status, value } = this
+  return new MyPromise(function(_resolveNext, _rejectNext) {
+    let successFun = val => {
+      try {
+        if (!isFunction(_resolve)) {
+          _resolveNext(val)
+        } else {
+          let result = _resolve(val)
+          if (result instanceof MyPromise) {
+            result.then(_resolveNext, _rejectNext)
+          } else {
+            _resolveNext(result)
+          }
+        }
+      } catch (error) {
+        _reject(error)
+      }
+    }
+    let failFun = err => {
+      try {
+        if (!isFunction(_reject)) {
+          _rejectNext(val)
+        } else {
+          let result = _rejectNext(val)
+          if (result instanceof MyPromise) {
+            result.then(_resolveNext, _rejectNext)
+          } else {
+            _resolveNext(result)
+          }
+        }
+      } catch (error) {
+        _reject(error)
+      }
+    }
+    switch (this.status) {
+      case 'pending':
+        this.successCb.push(successFun)
+        this.failFun.push(failFun)
+        break
+      case 'success':
+        successFun(value)
+        break
+      case 'fail':
+        failFun(value)
+        break
+    }
+  })
 }

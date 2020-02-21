@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>history 路由</title>
+  <style>
+    html,
+    body,
+    section {
+      width: 100%;
+      height: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <section id="content"></section>
+  <script>
+    let b = ''
+    document.getElementById('content').style.backgroundColor = 'red'
+    for (let i = 0; i < 1000000; i++) {
+      b += 'a'
+    }
+    console.log(b)
+    document.getElementById('content').style.backgroundColor = 'yellow'
+
+  </script>
+</body>
+
+</html>
