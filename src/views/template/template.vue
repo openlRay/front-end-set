@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import fStep from "../../visual-effects/css-effects/F-step"
+import fStep from '../../visual-effects/css-effects/F-step'
 
 export default {
   components: {
