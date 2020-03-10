@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import i18n from './views/i18n'
 import defaultLayout from './views/layouts/default'
 import vueT from './views/vueT'
 Vue.use(Router)
@@ -12,7 +13,7 @@ export default new Router({
       path: '/',
       name: '',
       component: defaultLayout,
-      children: [vueT]
+      children: [vueT, i18n]
     },
     {
       path: '/about',

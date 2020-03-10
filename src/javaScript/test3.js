@@ -1,14 +1,12 @@
-var globalVar = 'global'
-var outerVar = 'outer'
-
-function outerFunc(outerParam) {
-  function innerFunc(innerParam) {
-    console.log(globalVar, outerParam, innerParam)
+const getLanguage = ua => {
+  let reg = new RegExp('([a-z]{2})-([a-z]{2})', 'i')
+  let t = reg.exec(ua)
+  if (t && t[2] === 'tw') {
+    return 'tw'
   }
-  return innerFunc
+  if (t && t.length > 1) {
+    return t[1]
+  }
+  return 'en'
 }
-
-const x = outerFunc(outerVar)
-outerVar = 'outer-2'
-globalVar = 'guess'
-x('inner')
+console.log(getLanguage('ko-kr'))
