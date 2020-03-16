@@ -1,3 +1,10 @@
 {
-  "message": "this is message"
+  "message": "this is message",
+  "car": "car | cars",
+  "apple": "no apples | one apple | {count} apples",
+  "the_world": "the world",
+  "dio": "DIO:",
+  "linked": "@:dio @:the_world !!!!",
+  "hello": "hi there!",
+  "newHello": "hi {name}!"
 }

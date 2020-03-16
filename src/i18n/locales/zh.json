@@ -1,3 +1,10 @@
 {
-  "message": "这是一条消息"
+  "message": "这是一条消息",
+  "car": "car | cars",
+  "apple": "no apples | one apple | {count} apples",
+  "the_world": "这个世界",
+  "dio": "DIO:",
+  "linked": "@:dio @:the_world !!!!",
+  "hello": "嗨，你好啊！",
+  "newHello": "嗨 {name}!"
 }

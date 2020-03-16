@@ -1,6 +1,7 @@
 const getLanguage = ua => {
-  let reg = new RegExp('([a-z]{2})-([a-z]{2})', 'i')
+  let reg = new RegExp('/([a-z]{2})-([a-z]{2})', 'i')
   let t = reg.exec(ua)
+  console.log(t)
   if (t && t[2] === 'tw') {
     return 'tw'
   }
@@ -9,4 +10,4 @@ const getLanguage = ua => {
   }
   return 'en'
 }
-console.log(getLanguage('ko-kr'))
+console.log(getLanguage('/ko-kr'))
