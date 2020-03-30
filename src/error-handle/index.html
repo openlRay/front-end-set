@@ -1,0 +1,71 @@
+<!--
+ * @Author: ray_sun
+ * @Date: 2020-03-16 11:51:19
+ * @LastEditors: ray_sun
+ * @LastEditTime: 2020-03-16 16:43:16
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="./xxxxx.png">
+</body>
+<script>
+  function fun1() {
+    console.log('1->begin')
+    error
+    console.log('1->end')
+  }
+  setTimeout(() => {
+    fun1()
+
+  })
+  new Promise((resolve, reject) => {
+    error()
+  })
+  window.addEventListener('error', args => {
+      console.log(
+        'error event:', args.lineno
+      );
+      uploadError(args)
+      return true;
+    },
+    true // 利用捕获方式
+  )
+
+  function uploadError({
+    lineno,
+    colno,
+    error = {},
+    timeStamp,
+    message,
+    filename
+  }) {
+    // 过滤
+    const info = {
+      lineno,
+      colno,
+      error,
+      timeStamp,
+      message,
+      filename
+    }
+    // const str = new Buffer(JSON.stringify(info)).toString("base64");
+    const str = window.btoa(JSON.stringify(info))
+    const host = 'http://localhost:7001/monitor/error'
+    new Image().src = `${host}?info=${str}`
+  }
+
+  window.addEventListener("unhandledrejection", e => {
+    throw e.reason
+  })
+
+</script>
+
+</html>
