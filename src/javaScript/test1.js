@@ -63,7 +63,7 @@ MyPromise.prototype.then = function(_resolve, _reject) {
           }
         }
       } catch (error) {
-        _reject(error)
+        _rejectNext(error)
       }
     }
     let failFun = err => {
