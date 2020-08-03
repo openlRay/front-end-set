@@ -2,7 +2,7 @@
  * @Author: ray_sun
  * @Date: 2020-03-09 11:35:02
  * @LastEditors: ray_sun
- * @LastEditTime: 2020-03-09 20:00:11
+ * @LastEditTime: 2020-07-27 16:51:06
  */
 import defaultLayout from '../layouts/default'
 
@@ -15,7 +15,7 @@ export default {
       meta: {
         title: 'home'
       },
-      component: () => import('./home')
+      component: () => import('./home/index.vue')
     }
   ]
 }

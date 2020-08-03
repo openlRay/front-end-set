@@ -22,14 +22,13 @@
   content.onmousemove = throttle(count);
 
   function throttle(fn, time = 1000) {
-    let flag = true
-    return (...args) => {
-      if (!flag) return;
-      flag = false
-      setTimeout(() => {
-        fn.apply(this, args)
-        flag = true
-      }, time);
+    let timer = null
+    return function() {
+      if (timer) return
+      timer = setTimeout(() => {
+        fn.call(this)
+        timer = null
+      }, time)
     }
   }
 </script>

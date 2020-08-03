@@ -23,6 +23,17 @@
 
   function debounce(fn, time = 1000) {
     let timer = null
+    return function () {
+      if (timer) timer = null
+      timer = setTimeout(() => {
+        fn.call(this)
+        timer = null
+      }, time)
+    }
+  }
+
+  function debounce(fn, time = 1000) {
+    let timer = null
     return (...args) => {
       clearTimeout(timer);
       timer = setTimeout(() => {
