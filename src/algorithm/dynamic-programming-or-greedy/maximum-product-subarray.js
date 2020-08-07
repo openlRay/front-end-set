@@ -35,7 +35,6 @@ var maxProduct = function(nums) {
     max = Math.max(max, product)
     nums[i] === 0 && (product = 1)
   }
-  debugger
   product = 1
   for (let i = nums.length - 1; i > -1; i--) {
     product *= nums[i]
