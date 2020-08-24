@@ -53,4 +53,11 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) {}
+var isValidBST = function(root) {
+  return recur(root, Number.MAX_VALUE * -1, Number.MAX_VALUE)
+  function recur(node, min, max) {
+    if (!node) return true
+    if (node.val <= min || node.val >= max) return false
+    return recur(node.left, min, node.val) && recur(node.right, node.val, max)
+  }
+}
