@@ -53,12 +53,15 @@
  *     this.left = this.right = null;
  * }
  */
+
+// BFS
 /**
  * @param {TreeNode} root
  * @return {number}
  */
 var sumNumbers = function(root) {
-
+  if (!root) return
+  let ans = 0
 };
 // @lc code=end
 
