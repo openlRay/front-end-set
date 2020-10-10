@@ -54,5 +54,15 @@
  * @param {TreeNode} t2
  * @return {TreeNode}
  */
-var mergeTrees = function(t1, t2) {}
+var mergeTrees = function(t1, t2) {
+  function recur(n1, n2) {
+    if (!n1) return n2
+    if (!n2) return n1
+    n1.val = n1.val + n2.val
+    n1.left = recur(n1.left, n2.left)
+    n1.right = recur(n1.right, n2.right)
+    return n1
+  }
+  return recur(t1, t2)
+}
 // @lc code=end
